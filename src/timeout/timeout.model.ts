@@ -1,20 +1,20 @@
-import { TimeoutStatus } from './timeout-status.model';
+import { TimeoutStatus } from './timeout-status.model.ts';
 
 export class Timeout {
     uuid: string;
     handler: Function;
-    timeout: number;
+    timeout?: number;
     arguments: any[];
-    id: number;
+    id?: number;
     timestamp: number;
     status: TimeoutStatus;
 
-    constructor(handler: Function, timeout: number, ...args: any[]) {
+    constructor(handler: Function, timeout?: number, ...args: any[]) {
         this.uuid = this._generateUuid();
         this.handler = handler;
         this.timeout = timeout;
         this.arguments = args;
-        this.id = null;
+        this.id = undefined;
         this.timestamp = Date.now();
         this.status = TimeoutStatus.Scheduled;
     }

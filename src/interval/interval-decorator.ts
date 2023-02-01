@@ -1,4 +1,4 @@
-import { IntervalCollection } from './interval-collection.model';
+import { IntervalCollection } from './interval-collection.model.ts';
 
 export var intervalCollection = new IntervalCollection();
 
@@ -8,6 +8,6 @@ window.setInterval = (handler: any, interval?: any, ...args: any[]): number => {
 	}, interval, args);
 };
 
-window.clearInterval = function (id: number): void {
-	intervalCollection.remove(id);
+window.clearInterval = function (id?: number): void {
+	if (id) {intervalCollection.remove(id);}
 };

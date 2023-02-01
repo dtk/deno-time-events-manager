@@ -1,5 +1,5 @@
-import { originalClearInterval, originalSetInterval } from '../overrides/override'
-import { Interval } from './interval.model';
+import { originalClearInterval, originalSetInterval } from '../overrides/override.ts'
+import { Interval } from './interval.model.ts';
 
 export class IntervalCollection {
 	private _intervalCollection: Interval[] = [];

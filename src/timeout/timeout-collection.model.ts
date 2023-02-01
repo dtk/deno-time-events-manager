@@ -1,11 +1,11 @@
-import { originalClearTimeout, originalSetTimeout } from '../overrides/override'
-import { TimeoutStatus } from './timeout-status.model';
-import { Timeout } from './timeout.model';
-
+import { originalClearTimeout, originalSetTimeout } from '../overrides/override.ts'
+import { TimeoutStatus } from './timeout-status.model.ts';
+import { Timeout } from './timeout.model.ts';
+type HandlerType =  (...args: any[]) => void
 export class TimeoutCollection {
 	private _timeoutCollection: Timeout[] = [];
 
-	public add(handler: Function, timeout?: number, ...args: any[]) {
+	public add(handler: HandlerType, timeout?: number, ...args: any[]) {
 		let newTimeout = new Timeout(handler, timeout, args);
 		let id = originalSetTimeout.apply(window, [this._getWrappedHandler(newTimeout.uuid, handler), timeout, args]);
 		newTimeout.id = id;
@@ -55,7 +55,7 @@ export class TimeoutCollection {
 		this._timeoutCollection = [];
 	}
 
-	private _getWrappedHandler(timeoutUuid: string, handler: Function): Function {
+	private _getWrappedHandler(timeoutUuid: string, handler: HandlerType): HandlerType {
 		return ((...args: any[]) => {
 			this._timeoutCollection[this._getTimeoutIndexByUuid(timeoutUuid)].status = TimeoutStatus.Completed;
 

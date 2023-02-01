@@ -1,7 +1,7 @@
 export abstract class Interval {
-    id: number;
-    handler: Function;
-    interval: number;
-    arguments: any[];
-    timestamp: number;
+    id!: number;
+    handler!: Function;
+    interval!: number;
+    arguments!: any[];
+    timestamp!: number;
 }
